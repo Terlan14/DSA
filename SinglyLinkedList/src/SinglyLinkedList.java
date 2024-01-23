@@ -3,15 +3,18 @@ import java.util.List;
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class SinglyLinkedList {
+    //creating linkedlist
     private ListNode head;
     private static class ListNode {
         private int value;
+        // we declare next object to link nodes
         private ListNode next;
         public ListNode (int value) {
             this.value=value;
             this.next=next;
         }
     }
+    //this implementation deletes last element of linkedlist
     public void deleteLast() {
         ListNode current=head;
         if (head==null)
@@ -22,6 +25,32 @@ public class SinglyLinkedList {
                 current=current.next;
             }
             current.next=null;
+        }
+    }
+    //this implementation deletes first element of linkedlist
+    public void deleteFirst(){
+        if(head==null)
+            System.out.println("There is no element to delete");
+        else{
+            ListNode temp=head.next;
+            head.next=null;
+            head=temp;
+        }
+    }
+    //this implementation deletes element of the linkedlist at specific index
+    public void deleteAtIndex(int index){
+        if(index==1)
+            head=head.next;
+        else{
+            int count=1;
+            ListNode previous=head;
+            while(count<index-1){
+                previous=previous.next;
+                count++;
+            }
+            ListNode current=previous.next;
+            previous.next=current.next;
+            //current.next=null;
         }
     }
 
@@ -78,7 +107,7 @@ public class SinglyLinkedList {
         singlyLinkedList.head.next=second;
         second.next=third;
         third.next=fourth;
-        singlyLinkedList.deleteLast();
+        singlyLinkedList.deleteAtIndex(2);
         singlyLinkedList.display();
 
     }
