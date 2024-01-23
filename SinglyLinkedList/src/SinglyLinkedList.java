@@ -93,6 +93,18 @@ public class SinglyLinkedList {
             head=newNode;
         }
     }
+    //this method implements to add given value at given index
+    public void insertValueAtIndex(int index,int value){
+        ListNode newNode=new ListNode(value);
+        int count=1;
+        ListNode current=head;
+        while(count<index){
+            current=current.next;
+            count++;
+        }
+        newNode.next=current.next;
+        current.next=newNode;
+    }
 
 
 
@@ -107,7 +119,6 @@ public class SinglyLinkedList {
         singlyLinkedList.head.next=second;
         second.next=third;
         third.next=fourth;
-        singlyLinkedList.deleteAtIndex(2);
         singlyLinkedList.display();
 
     }
