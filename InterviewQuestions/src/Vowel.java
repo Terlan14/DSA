@@ -6,6 +6,7 @@ public class Vowel {
         String result;
         System.out.println(removeVowel("salam_dostlar"));
     }
+    //given string input and return this string without vowels so a,e,i,o,u
     public static String removeVowel(String string) {
         Set<Character>vowels=Set.of('a','e','i','o','u');
         StringBuilder sb=new StringBuilder();
