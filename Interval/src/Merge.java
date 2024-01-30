@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
@@ -6,7 +7,14 @@ import java.util.List;
 // then press Enter. You can now see whitespace characters in your code.
 public class Merge {
     public static void main(String[] args) {
-
+        List<Interval>interval=new ArrayList<>();
+        interval.add(0,new Interval(1,3));
+        interval.add(1,new Interval(2,5));
+        interval.add(2,new Interval(7,10));
+        List<Interval>result=merge(interval);
+        for(int i=0;i<result.size();i++){
+            System.out.println(result.get(i).start+","+result.get(i).end);
+        }
     }
     public static class Interval {
         private int start;
@@ -18,7 +26,7 @@ public class Merge {
     }
     //we have given list of intervals as [{2,5},{1,3},{7,10}] we should merge intervals if it's overlapping if not return itself
 
-    public List<Interval> merge(List<Interval>intervals){
+    public static List<Interval> merge(List<Interval>intervals){
         //check if 1 interval exists then return this interval
         if(intervals.size()<2) return intervals;
         //it's static method for sorting intervals for start element
