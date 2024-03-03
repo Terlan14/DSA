@@ -1,10 +1,11 @@
+import java.util.ArrayList;
 import java.util.List;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class SinglyLinkedList {
     //creating linkedlist
-    private ListNode head;
+    private static ListNode head;
     private static class ListNode {
         private int value;
         // we declare next object to link nodes
@@ -53,9 +54,41 @@ public class SinglyLinkedList {
             //current.next=null;
         }
     }
+    public boolean isPalindrome(){
+        if(head==null ||head.next==null)
+            return true;
+        ListNode slow=head;
+        ListNode fast=head;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        ListNode reversedNode=reverse(slow);
+        while (reversedNode!=null){
+            if(head.value!=reversedNode.value){
+                return false;
+            }
+            head=head.next;
+            reversedNode=reversedNode.next;
+        }
+        return true;
+    }
+    public ListNode reverse(ListNode head){
+        ListNode current=head;
+        ListNode previous=null;
+        ListNode next=null;
+        while (current!=null){
+            next=current.next;
+            current.next=previous;
+            previous=current;
+            current=next;
+        }
+        return previous;
+
+    }
 
     //this method implements printing all of listnode elements
-    public void display()
+    public void display(ListNode head)
     {
         ListNode current=head;
         while (current!=null)
@@ -96,17 +129,62 @@ public class SinglyLinkedList {
     //this method implements to add given value at given index
     public void insertValueAtIndex(int index,int value){
         ListNode newNode=new ListNode(value);
-        int count=1;
-        ListNode current=head;
-        while(count<index){
-            current=current.next;
-            count++;
+        if(index==1){
+            newNode.next=head;
+            head=newNode;
         }
-        newNode.next=current.next;
-        current.next=newNode;
+        else {
+            int count = 1;
+            ListNode current = head;
+            while (count < index) {
+                current = current.next;
+                count++;
+            }
+            newNode.next = current.next;
+            current.next = newNode;
+        }
+    }
+    //Remove element with given value (Leetcode 203 problem)
+    public ListNode removeElements(int value){
+        if(head==null){
+            return head;
+        }
+
+        ListNode tempNode=new ListNode(0);
+        tempNode.next=head;
+        ListNode prev=tempNode;
+        ListNode curr=head;
+        while(curr!=null){
+            if(head.value==value){
+                head=head.next;
+            }
+            if(curr.value==value){
+                prev.next=curr.next;
+            }
+            else{
+                prev=curr;
+            }
+            curr=curr.next;
+        }
+
+        return tempNode.next  ;
     }
 
-
+    //counts element of the linkedlist
+    public int countElements(){
+        ListNode current=head;
+        if(head==null)
+            return 0;
+        else {
+            int count = 0;
+            while (current.next != null) {
+                current = current.next;
+                count++;
+            }
+            count++;
+            return count;
+        }
+    }
 
 
     public static void main(String[] args)
@@ -116,10 +194,19 @@ public class SinglyLinkedList {
         ListNode second=new ListNode(20);
         ListNode third=new ListNode(30);
         ListNode fourth=new ListNode(40);
+        ListNode fifth=new ListNode(30);
+        ListNode sixth=new ListNode(20);
+        ListNode seventh=new ListNode(50);
         singlyLinkedList.head.next=second;
         second.next=third;
         third.next=fourth;
-        singlyLinkedList.display();
+        fourth.next=fifth;
+        fifth.next=sixth;
+        sixth.next=seventh;
+        singlyLinkedList.display(head);
+        //System.out.println(singlyLinkedList.isPalindrome());
+        ListNode reversed=singlyLinkedList.reverse(head);
+        singlyLinkedList.display(reversed);
 
     }
 }

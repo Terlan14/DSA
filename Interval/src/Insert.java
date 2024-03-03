@@ -8,7 +8,7 @@ public class Insert {
         intervals.add(new Interval(14,15));
         //it can be useful if our interval isn't sorted
         intervals.sort(Comparator.comparingInt(in->in.start));
-        List<Interval>result=insertAndMergeInterval(intervals,new Interval(2,10));
+        List<Interval>result=insertAndMergeInterval(intervals,new Interval(16,18));
         for(int i=0;i<result.size();i++){
             System.out.println(result.get(i).start+","+result.get(i).end);
         }
